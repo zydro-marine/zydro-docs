@@ -5,4 +5,4 @@ ignore = []
 remote_ignore = []
 
 [bunny]
-storage_zone = "zydro-docs"
+storage_zone = "zydro-documentation"
