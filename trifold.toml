@@ -1,0 +1,8 @@
+provider = "bunny"
+remote_path = ""
+local_path = "build2"
+ignore = []
+remote_ignore = []
+
+[bunny]
+storage_zone = "zydro-docs"
