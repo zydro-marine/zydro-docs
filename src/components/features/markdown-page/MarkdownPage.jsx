@@ -140,7 +140,7 @@ function MarkdownPage({ file }) {
                 padding="2rem"
                 lineHeight="1.6"
                 width="100%"
-                maxWidth="800px"
+                maxWidth="1200px"
                 margin="0 auto"
             >
                 <Box

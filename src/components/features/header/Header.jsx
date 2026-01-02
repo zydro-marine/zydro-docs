@@ -28,7 +28,7 @@ function Header() {
             backgroundColor="#131313"
             color="white"
             height="80px"
-            border-bottom="1px solid rgba(255,255,255,0.2)"
+            borderBottom="1px solid rgba(255,255,255,0.06)"
         >
             <Box
                 maxWidth="1200px"

@@ -39,9 +39,6 @@ function TableOfContents({ headings }) {
             width="250px"
             flexShrink="0"
             padding="2rem 1.5rem"
-            borderLeft="1px solid"
-            borderColor={borderColor}
-            backgroundColor={tocBg}
             height="calc(100vh - 80px)"
             overflowY="auto"
             position="sticky"
@@ -54,10 +51,8 @@ function TableOfContents({ headings }) {
                 color={headerColor}
                 marginBottom="1rem"
                 paddingBottom="0.5rem"
-                borderBottom="1px solid"
-                borderColor={borderColor}
             >
-                Contents
+                Table of Contents
             </Text>
             <Box as="nav" fontSize="0.9rem">
                 <VStack

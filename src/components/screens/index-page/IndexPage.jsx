@@ -62,11 +62,8 @@ function IndexPage({ manifest }) {
         "rgba(255,255,255,0.5)"
     );
     const tabBorderColor = useColorModeValue("#e0e0e0", "gray.600");
-    const activeTabColor = useColorModeValue("#0066cc", "blue.300");
-    const inactiveTabColor = useColorModeValue(
-        "rgba(0,0,0,0.7)",
-        "rgba(255,255,255,0.7)"
-    );
+    const activeTabColor = "blue.500";
+    const inactiveTabColor = "rgba(255, 255, 255, 0.842)";
     const tileBg = useColorModeValue("white", "gray.700");
     const tileBorder = useColorModeValue("#e0e0e0", "gray.600");
     const tileHoverBorder = useColorModeValue("#0066cc", "blue.300");
@@ -133,7 +130,6 @@ function IndexPage({ manifest }) {
                     maxWidth="1200px"
                     width="100%"
                     margin="0 auto"
-                    border="1px solid red"
                     display="flex"
                     pt="20px"
                     flexDir="column"
@@ -147,7 +143,6 @@ function IndexPage({ manifest }) {
                         flexDir="column"
                         justifyContent="stretch"
                         alignItems="stretch"
-                        border="1px solid red"
                     >
                         <LittleCrossAccent />
                         <Text
