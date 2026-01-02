@@ -18,7 +18,7 @@ function Sidebar({ manifest }) {
   };
 
   return (
-    <Box as="aside" className="sidebar" width="250px" flexShrink="0" borderRight="1px solid #e0e0e0" backgroundColor="#fafafa" height="100%" overflowY="auto">
+    <Box as="aside" className="sidebar" width="250px" flexShrink="0" borderRight="1px solid #e0e0e0" backgroundColor="#fafafa" alignSelf="stretch" minHeight="100%" overflowY="auto" overflowX="hidden">
       <Box as="nav" padding="20px">
         <VStack spacing="20px" align="stretch">
           {manifest.categories.map(category => {

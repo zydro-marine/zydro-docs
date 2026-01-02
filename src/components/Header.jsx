@@ -1,5 +1,6 @@
 import { Link as RouterLink, useLocation } from 'react-router-dom';
-import { Box, Link, Button, HStack, Text } from '@chakra-ui/react';
+import { Box, Link, Button, HStack, Text, IconButton, useColorMode, useColorModeValue } from '@chakra-ui/react';
+import { TbSun, TbMoon } from 'react-icons/tb';
 import { useAuth } from '../contexts/AuthContext';
 import SearchBar from './SearchBar';
 import './Header.scss';
@@ -8,6 +9,8 @@ function Header() {
   const { isAuthenticated, user, logout } = useAuth();
   const location = useLocation();
   const isIndexPage = location.pathname === '/';
+  const { colorMode, toggleColorMode } = useColorMode();
+  const iconColor = useColorModeValue('black', 'white');
 
   return (
     <Box as="header" className="header" width="100%">
@@ -21,6 +24,14 @@ function Header() {
           </Box>
         )}
         <Box className="header-auth" display="flex" flexDir="row" alignItems="center" gap="10px">
+          <IconButton
+            aria-label="Toggle color mode"
+            icon={colorMode === 'light' ? <TbMoon /> : <TbSun />}
+            onClick={toggleColorMode}
+            size="sm"
+            variant="styledOutline"
+            color={iconColor}
+          />
           {isAuthenticated ? (
             <>
               <Text className="header-user" fontSize="14px">

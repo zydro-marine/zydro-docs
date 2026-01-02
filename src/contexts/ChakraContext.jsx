@@ -1,15 +1,24 @@
 import { extendTheme } from '@chakra-ui/react';
 import { ChakraProvider } from '@chakra-ui/react';
 
+const config = {
+    initialColorMode: 'light',
+    useSystemColorMode: false,
+};
+
 const theme = extendTheme({
+    config,
     fonts: {
         heading: `"Hubot Sans", system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`,
         body: `"Hubot Sans", system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`,
     },
     styles: {
-        global: {
-            'html, body': {},
-        },
+        global: (props) => ({
+            'html, body': {
+                bg: props.colorMode === 'dark' ? '#1a202c' : 'white',
+                color: props.colorMode === 'dark' ? 'white' : 'black',
+            },
+        }),
     },
     components: {
         Button: {
@@ -86,8 +95,6 @@ const theme = extendTheme({
             },
         },
     },
-    initialColorMode: 'light',
-    useSystemColorMode: false,
 });
 
 const ChakraContextProvider = ({ children }) => {

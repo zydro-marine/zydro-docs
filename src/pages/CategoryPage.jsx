@@ -1,4 +1,4 @@
-import { useParams, Navigate } from 'react-router-dom';
+import { useParams, Redirect } from 'react-router-dom';
 import { Box, Heading, Text, Spinner } from '@chakra-ui/react';
 
 function CategoryPage({ manifest }) {
@@ -29,18 +29,18 @@ function CategoryPage({ manifest }) {
     
     // If project has an index file, go to project page
     if (firstProject.indexFile) {
-      return <Navigate to={`/${category}/${projectName}`} replace />;
+      return <Redirect to={`/${category}/${projectName}`} />;
     }
     
     // Otherwise, go to first page in the project
     if (firstProject.pages && firstProject.pages.length > 0) {
       const firstPage = firstProject.pages[0];
       const pageName = firstPage.path.split('/').pop();
-      return <Navigate to={`/${category}/${projectName}/${pageName}`} replace />;
+      return <Redirect to={`/${category}/${projectName}/${pageName}`} />;
     }
     
     // If project has no pages, go to project page (will handle error there)
-    return <Navigate to={`/${category}/${projectName}`} replace />;
+    return <Redirect to={`/${category}/${projectName}`} />;
   }
 
   return (

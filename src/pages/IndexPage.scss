@@ -70,7 +70,7 @@
 
 .index-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 1.5rem;
 }
 
@@ -86,7 +86,7 @@
   padding: 1.5rem;
   background-color: #fff;
   transition: box-shadow 0.2s;
-  height: 100%;
+  min-height: 150px;
   display: flex;
   flex-direction: column;
 
@@ -120,6 +120,9 @@
   margin: 0;
   font-size: 1.5rem;
   color: #333;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  line-height: 1.4;
 }
 
 .index-tile-meta {

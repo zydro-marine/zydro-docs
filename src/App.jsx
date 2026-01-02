@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, useLocation } from 'react-router-dom';
 import { Box } from '@chakra-ui/react';
 import { AuthProvider } from './contexts/AuthContext';
 import Header from './components/Header';
@@ -31,15 +31,15 @@ function AppContent() {
     <Box className="app-container" minHeight="100vh" display="flex" flexDirection="column" width="100%">
       <Header />
       {!isIndexPage && <Breadcrumbs manifest={manifest} />}
-      <Box className={`app-content ${isIndexPage ? 'no-sidebar' : ''}`} display="flex" flex="1">
+      <Box className={`app-content ${isIndexPage ? 'no-sidebar' : ''}`} display="flex" flex="1" alignSelf="stretch" minHeight="0">
         {!isIndexPage && <Sidebar manifest={manifest} />}
         <Box as="main" className="app-main" flex="1" display="flex" flexDirection="column" width="100%">
-          <Routes>
-            <Route path="/" element={<IndexPage manifest={manifest} />} />
-            <Route path="/:category" element={<CategoryPage manifest={manifest} />} />
-            <Route path="/:category/:project" element={<ProjectPage manifest={manifest} />} />
-            <Route path="/:category/:project/:page" element={<DocPage manifest={manifest} />} />
-          </Routes>
+          <Switch>
+            <Route exact path="/" render={() => <IndexPage manifest={manifest} />} />
+            <Route exact path="/:category" render={() => <CategoryPage manifest={manifest} />} />
+            <Route exact path="/:category/:project" render={() => <ProjectPage manifest={manifest} />} />
+            <Route exact path="/:category/:project/:page" render={() => <DocPage manifest={manifest} />} />
+          </Switch>
         </Box>
       </Box>
       <Footer />

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { Box, Heading, HStack, Button, SimpleGrid, Text, Link, Spinner } from '@chakra-ui/react';
+import { Box, Heading, HStack, Button, Stack, Text, Link, Spinner } from '@chakra-ui/react';
 import * as TbIcons from 'react-icons/tb';
 import SearchBar from '../components/SearchBar';
 import './IndexPage.scss';
@@ -75,8 +75,7 @@ function IndexPage({ manifest }) {
       </Box>
 
       <Box className="index-content" padding="40px" width="100%">
-        <Box className="index-grid" margin="0 auto" maxWidth="1200px">
-          <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing="20px">
+          <Stack flex="1" direction="row" spacing="20px" flexWrap="wrap" shouldWrapChildren>
             {projectsToShow.map(project => {
               const projectName = project.path.split('/').pop();
               const projectPath = `/${project.categoryPath}/${projectName}`;
@@ -85,6 +84,7 @@ function IndexPage({ manifest }) {
 
               return (
                 <Link
+                minW="300px"
                   key={project.path}
                   as={RouterLink}
                   to={projectPath}
@@ -92,20 +92,20 @@ function IndexPage({ manifest }) {
                   textDecoration="none"
                   _hover={{ textDecoration: 'none' }}
                 >
-                  <Box className="index-tile" padding="20px" border="1px solid #e0e0e0" borderRadius="8px" backgroundColor="white" height="100%" _hover={{ borderColor: '#0066cc', boxShadow: '0 2px 8px rgba(0,102,204,0.1)' }} transition="all 0.2s">
-                    <Text className="index-tile-category" fontSize="12px" textTransform="uppercase" color="rgba(0,0,0,0.5)" marginBottom="10px" fontWeight="600" letterSpacing="0.5px">
+                  <Box className="index-tile" padding="20px" border="1px solid #e0e0e0" borderRadius="8px" backgroundColor="white" minHeight="150px" display="flex" flexDirection="column" _hover={{ borderColor: '#0066cc', boxShadow: '0 2px 8px rgba(0,102,204,0.1)' }} transition="all 0.2s">
+                    <Text className="index-tile-category" fontSize="12px" textTransform="uppercase" color="rgba(0,0,0,0.5)" marginBottom="10px" fontWeight="600" letterSpacing="0.5px" overflowWrap="break-word" wordBreak="break-word">
                       {project.categoryName}
                     </Text>
-                    <HStack className="index-tile-header" spacing="12px" marginBottom="10px" alignItems="flex-start">
-                      <Box fontSize="24px" color="#0066cc" flexShrink="0">
+                    <HStack className="index-tile-header" spacing="12px" marginBottom="10px" alignItems="flex-start" flex="1">
+                      <Box fontSize="24px" color="#0066cc" flexShrink="0" marginTop="2px">
                         <IconComponent className="index-tile-icon" />
                       </Box>
-                      <Heading as="h2" className="index-tile-title" size="md" color="black">
+                      <Heading as="h2" className="index-tile-title" size="md" color="black" overflowWrap="break-word" wordBreak="break-word" lineHeight="1.4">
                         {project.name}
                       </Heading>
                     </HStack>
                     {project.pages && project.pages.length > 0 && (
-                      <Text className="index-tile-meta" fontSize="14px" color="rgba(0,0,0,0.6)">
+                      <Text className="index-tile-meta" fontSize="14px" color="rgba(0,0,0,0.6)" marginTop="auto" paddingTop="10px">
                         {project.pages.length} {project.pages.length === 1 ? 'page' : 'pages'}
                       </Text>
                     )}
@@ -113,9 +113,8 @@ function IndexPage({ manifest }) {
                 </Link>
               );
             })}
-          </SimpleGrid>
+          </Stack>
         </Box>
-      </Box>
     </Box>
   );
 }

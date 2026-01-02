@@ -1,4 +1,4 @@
-import { useParams, Navigate } from 'react-router-dom';
+import { useParams, Redirect } from 'react-router-dom';
 import { Box, Heading, Text, Spinner } from '@chakra-ui/react';
 import MarkdownPage from '../components/MarkdownPage';
 import './ProjectPage.scss';
@@ -46,7 +46,7 @@ function ProjectPage({ manifest }) {
 
   if (firstPage) {
     const pageName = firstPage.path.split('/').pop();
-    return <Navigate to={`/${category}/${project}/${pageName}`} replace />;
+    return <Redirect to={`/${category}/${project}/${pageName}`} />;
   }
 
   return (
