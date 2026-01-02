@@ -1,0 +1,76 @@
+{
+  "categories": [
+    {
+      "name": "hardware",
+      "path": "hardware",
+      "indexFile": "hardware/index.md",
+      "projects": [
+        {
+          "name": "compute-module",
+          "path": "hardware/compute-module",
+          "indexFile": null,
+          "pages": [
+            {
+              "name": "overview",
+              "path": "hardware/compute-module/overview",
+              "file": "hardware/compute-module/overview.md"
+            }
+          ]
+        },
+        {
+          "name": "raspberry-pi",
+          "path": "hardware/raspberry-pi",
+          "indexFile": "hardware/raspberry-pi/index.md",
+          "pages": [
+            {
+              "name": "advanced-config",
+              "path": "hardware/raspberry-pi/advanced-config",
+              "file": "hardware/raspberry-pi/advanced-config.md"
+            },
+            {
+              "name": "getting-started",
+              "path": "hardware/raspberry-pi/getting-started",
+              "file": "hardware/raspberry-pi/getting-started.md"
+            },
+            {
+              "name": "overview",
+              "path": "hardware/raspberry-pi/overview",
+              "file": "hardware/raspberry-pi/overview.md"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "software",
+      "path": "software",
+      "indexFile": null,
+      "projects": [
+        {
+          "name": "raspberry-pi-connect",
+          "path": "software/raspberry-pi-connect",
+          "indexFile": null,
+          "pages": [
+            {
+              "name": "setup",
+              "path": "software/raspberry-pi-connect/setup",
+              "file": "software/raspberry-pi-connect/setup.md"
+            }
+          ]
+        },
+        {
+          "name": "raspberry-pi-os",
+          "path": "software/raspberry-pi-os",
+          "indexFile": null,
+          "pages": [
+            {
+              "name": "installation",
+              "path": "software/raspberry-pi-os/installation",
+              "file": "software/raspberry-pi-os/installation.md"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

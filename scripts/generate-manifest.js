@@ -1,0 +1,141 @@
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const docsDir = path.join(__dirname, '..', 'docs');
+const publicDocsDir = path.join(__dirname, '..', 'public', 'docs');
+const manifestPath = path.join(__dirname, '..', 'public', 'manifest.json');
+
+function scanDocsDirectory(dir, basePath = '', depth = 0) {
+  const entries = [];
+  const items = fs.readdirSync(dir, { withFileTypes: true });
+
+  let indexFile = null;
+
+  for (const item of items) {
+    const fullPath = path.join(dir, item.name);
+    const relativePath = basePath ? `${basePath}/${item.name}` : item.name;
+
+    if (item.isDirectory()) {
+      if (depth === 0) {
+        const category = {
+          name: item.name,
+          path: relativePath,
+          projects: [],
+          indexFile: null
+        };
+
+        const indexPath = path.join(fullPath, 'index.md');
+        if (fs.existsSync(indexPath)) {
+          category.indexFile = `${relativePath}/index.md`;
+        }
+
+        const subItems = scanDocsDirectory(fullPath, relativePath, depth + 1);
+        subItems.forEach(subItem => {
+          if (subItem.type === 'project') {
+            category.projects.push(subItem);
+          }
+        });
+
+        entries.push({
+          type: 'category',
+          ...category
+        });
+      } else if (depth === 1) {
+        const project = {
+          name: item.name,
+          path: relativePath,
+          pages: [],
+          indexFile: null
+        };
+
+        const indexPath = path.join(fullPath, 'index.md');
+        if (fs.existsSync(indexPath)) {
+          project.indexFile = `${relativePath}/index.md`;
+        }
+
+        const subItems = scanDocsDirectory(fullPath, relativePath, depth + 1);
+        subItems.forEach(subItem => {
+          if (subItem.type === 'page') {
+            project.pages.push(subItem);
+          }
+        });
+
+        entries.push({
+          type: 'project',
+          ...project
+        });
+      }
+    } else if (item.name.endsWith('.md')) {
+      if (item.name === 'index.md') {
+        indexFile = relativePath;
+      } else {
+        const pageName = item.name.replace('.md', '');
+        entries.push({
+          type: 'page',
+          name: pageName,
+          path: relativePath.replace('.md', ''),
+          file: relativePath
+        });
+      }
+    }
+  }
+
+  return entries;
+}
+
+function copyDocs() {
+  try {
+    if (fs.existsSync(docsDir) && fs.statSync(docsDir).isDirectory()) {
+      fs.mkdirSync(publicDocsDir, { recursive: true });
+      fs.cpSync(docsDir, publicDocsDir, { recursive: true, force: true });
+      console.log('Docs copied to public/docs');
+    }
+  } catch (err) {
+    console.warn('Error copying docs directory:', err.message);
+  }
+}
+
+function generateManifest() {
+  if (!fs.existsSync(docsDir)) {
+    console.log('Docs directory does not exist, creating empty manifest');
+    fs.mkdirSync(path.dirname(manifestPath), { recursive: true });
+    fs.writeFileSync(manifestPath, JSON.stringify({ categories: [] }, null, 2));
+    return;
+  }
+
+  copyDocs();
+
+  const structure = scanDocsDirectory(docsDir);
+  const categories = structure.filter(item => item.type === 'category');
+
+  const manifest = {
+    categories: categories.map(cat => ({
+      name: cat.name,
+      path: cat.path,
+      indexFile: cat.indexFile || null,
+      projects: cat.projects.map(project => ({
+        name: project.name,
+        path: project.path,
+        indexFile: project.indexFile || null,
+        pages: project.pages.map(page => ({
+          name: page.name,
+          path: page.path,
+          file: page.file
+        }))
+      }))
+    }))
+  };
+
+  fs.mkdirSync(path.dirname(manifestPath), { recursive: true });
+  fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
+  console.log('Manifest generated successfully at', manifestPath);
+  console.log('Found', categories.length, 'categories');
+  const totalProjects = categories.reduce((sum, cat) => sum + cat.projects.length, 0);
+  console.log('Found', totalProjects, 'projects');
+}
+
+generateManifest();

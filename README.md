@@ -1,21 +1,16 @@
-# Documentation
+# React + Vite
 
-Public documentation website for the Zydro product ecosystem.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Adding Documentation
+Currently, two official plugins are available:
 
-The documentation is in the `docs/` folder.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Architecture
+## React Compiler
 
-Documentation is configured using Markdown and JSON, and then converted into HTML.
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-The static HTML is served by an API server which handles analytics, search, and authentication against protected pages.
+## Expanding the ESLint configuration
 
-### Folder Structure
-
-- `docs`: Holds all documentation Markdown.
-- `static`: Static images, fonts, videos, css, etc.
-- `generator`: Source code for the static generation script
-- `api`: API server hosting the finalized documentation.
-- `scripts`: Tools for CI/CD.
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.

@@ -1,10 +1,8 @@
 provider = "bunny"
 remote_path = ""
-local_path = "dist"
+local_path = "build2"
 ignore = []
 remote_ignore = []
 
 [bunny]
 storage_zone = "zydro-documentation"
-custom_404_page = "/404.html"
-
