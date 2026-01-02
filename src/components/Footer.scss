@@ -1,7 +1,7 @@
 .footer {
-  border-top: 1px solid #e0e0e0;
+  border-top: 1px solid rgba(255,255,255,0.1);
   padding: 2rem;
-  background-color: #fafafa;
+  background-color: #000000;
   margin-top: auto;
   width: 100%;
 }
@@ -17,7 +17,7 @@
 }
 
 .footer-copyright {
-  color: #666;
+  color: white;
   font-size: 0.9rem;
 }
 
@@ -28,11 +28,11 @@
 }
 
 .footer-link {
-  color: #666;
+  color: white;
   text-decoration: none;
 
   &:hover {
-    color: #0066cc;
+    color: rgba(255,255,255,0.8);
   }
 }
 

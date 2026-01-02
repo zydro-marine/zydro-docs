@@ -13,17 +13,17 @@ function Header() {
   const iconColor = useColorModeValue('black', 'white');
 
   return (
-    <Box as="header" className="header" width="100%">
-      <Box className="header-content" margin="0 auto" maxWidth="1200px" paddingLeft="30px" paddingRight="30px" display="flex" flexDir="row" justifyContent="stretch" alignItems="center" height="100%">
+    <Box as="header" className="header" width="100%" display="flex" justifyContent="center">
+      <Box className="header-content" maxWidth="1200px" width="100%" paddingLeft="30px" paddingRight="30px" display="flex" flexDir="row" justifyContent="space-between" alignItems="center" height="100%">
         <Link as={RouterLink} to="/" className="header-link" textDecoration="none" color="black" fontWeight="600">
           Zydro Documentation
         </Link>
         {!isIndexPage && (
-          <Box className="header-search" flex="1" marginLeft="20px" marginRight="20px">
+          <Box className="header-search" flex="1" marginLeft="20px" marginRight="20px" maxWidth="600px">
             <SearchBar />
           </Box>
         )}
-        <Box className="header-auth" display="flex" flexDir="row" alignItems="center" gap="10px">
+        <Box className="header-auth" display="flex" flexDir="row" alignItems="center" gap="10px" flexShrink="0">
           <IconButton
             aria-label="Toggle color mode"
             icon={colorMode === 'light' ? <TbMoon /> : <TbSun />}
