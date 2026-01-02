@@ -27,6 +27,31 @@ function getProjectIcon(projectName) {
     return iconMap[normalizedName] || TbIcons.TbFileText;
 }
 
+function LittleCrossAccent() {
+    return (
+        <Box position="relative" display={["none", "none", "block"]}>
+            <Box position="absolute" left="-15px" top="-10px">
+                <Box
+                    w="20px"
+                    h="1px"
+                    bg="rgba(255, 255, 255, 0.2)"
+                    position="absolute"
+                    left="-10px"
+                    bottom="-1px"
+                ></Box>
+                <Box
+                    w="1px"
+                    h="20px"
+                    bg="rgba(255, 255, 255, 0.2)"
+                    position="absolute"
+                    left="-1px"
+                    bottom="-10px"
+                ></Box>
+            </Box>
+        </Box>
+    );
+}
+
 function IndexPage({ manifest }) {
     const [selectedCategory, setSelectedCategory] = useState(null);
     const headerBg = useColorModeValue("#fafafa", "gray.800");
@@ -98,36 +123,42 @@ function IndexPage({ manifest }) {
     return (
         <Box width="100%" display="flex" flexDirection="column">
             <Box
-                as="header"
-                width="100%"
-                paddingTop="3rem"
-                paddingBottom="0"
-                paddingLeft="2rem"
-                paddingRight="2rem"
-                backgroundColor={headerBg}
-                borderBottom="1px solid"
-                borderColor={headerBorder}
+                display="flex"
+                justifyContent="stretch"
+                alignItems="stretch"
+                bgImage="/images/contour-v2-dark.svg"
+                bgColor="#161616"
             >
                 <Box
+                    maxWidth="1200px"
+                    width="100%"
                     margin="0 auto"
-                    maxWidth="1400px"
+                    border="1px solid red"
                     display="flex"
-                    flexDirection="column"
-                    gap="2rem"
-                    paddingBottom="0"
+                    pt="20px"
+                    flexDir="column"
+                    justifyContent="stretch"
+                    alignItems="stretch"
                 >
-                    <Heading
-                        as="h1"
-                        size="xl"
-                        margin="0"
-                        fontSize="2.5rem"
-                        fontWeight="bold"
-                        color={titleColor}
-                        marginBottom="30px"
+                    <Box
+                        flex="1"
+                        padding={["40px", "40px", "60px"]}
+                        display="flex"
+                        flexDir="column"
+                        justifyContent="stretch"
+                        alignItems="stretch"
+                        border="1px solid red"
                     >
-                        Documentation
-                    </Heading>
-
+                        <LittleCrossAccent />
+                        <Text
+                            fontSize="38px"
+                            fontWeight="500"
+                            marginBottom="10px"
+                            color="#ffffff"
+                        >
+                            Documentation
+                        </Text>
+                    </Box>
                     <Box maxWidth="600px" width="100%" marginBottom="30px">
                         <SearchBar />
                     </Box>

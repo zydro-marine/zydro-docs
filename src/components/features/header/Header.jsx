@@ -6,9 +6,8 @@ import {
     HStack,
     Text,
     IconButton,
-    useColorMode,
-    useColorModeValue,
     Spinner,
+    Image,
 } from "@chakra-ui/react";
 import { TbSun, TbMoon } from "react-icons/tb";
 import { useAuth } from "../../../contexts/AuthContext";
@@ -18,47 +17,42 @@ function Header() {
     const { isAuthenticated, user, logout, login, isLoading } = useAuth();
     const location = useLocation();
     const isIndexPage = location.pathname === "/";
-    const { colorMode, toggleColorMode } = useColorMode();
-    const iconColor = useColorModeValue("black", "white");
-    const headerBg = useColorModeValue("white", "gray.800");
-    const headerBorder = useColorModeValue("#e0e0e0", "gray.700");
-    const linkColor = useColorModeValue("black", "white");
-    const textColor = useColorModeValue(
-        "rgba(0,0,0,0.6)",
-        "rgba(255,255,255,0.6)"
-    );
 
     return (
         <Box
             as="header"
             width="100%"
             display="flex"
-            justifyContent="center"
-            borderBottom="1px solid"
-            borderColor={headerBorder}
-            backgroundColor={headerBg}
-            padding="1rem 2rem"
+            justifyContent="stretch"
+            alignItems="stretch"
+            backgroundColor="#131313"
+            color="white"
+            height="80px"
+            border-bottom="1px solid rgba(255,255,255,0.2)"
         >
             <Box
-                maxWidth="1400px"
+                maxWidth="1200px"
                 width="100%"
                 margin="0 auto"
                 display="flex"
                 flexDir="row"
                 justifyContent="space-between"
                 alignItems="center"
-                gap="2rem"
+                pl="20px"
+                pr="20px"
             >
                 <Link
                     as={RouterLink}
                     to="/"
                     textDecoration="none"
-                    color={linkColor}
                     fontWeight="bold"
                     fontSize="1.5rem"
                     flexShrink="0"
                 >
-                    Zydro Documentation
+                    <Image
+                        src="/images/logos/logo-text-2.svg"
+                        w="100px"
+                    ></Image>
                 </Link>
                 {!isIndexPage && (
                     <Box flex="1" maxWidth="600px" margin="0 auto">
@@ -72,37 +66,21 @@ function Header() {
                     gap="1rem"
                     flexShrink="0"
                 >
-                    <IconButton
-                        aria-label="Toggle color mode"
-                        icon={colorMode === "light" ? <TbMoon /> : <TbSun />}
-                        onClick={toggleColorMode}
-                        size="sm"
-                        variant="styledOutline"
-                        color={iconColor}
-                    />
                     {isLoading ? (
                         <Spinner size="sm" />
                     ) : isAuthenticated ? (
                         <>
-                            <Text fontSize="0.9rem" color={textColor}>
+                            <Text fontSize="0.9rem">
                                 {user?.profile?.name ||
                                     user?.profile?.email ||
                                     "User"}
                             </Text>
-                            <Button
-                                onClick={logout}
-                                size="sm"
-                                variant="styledOutline"
-                            >
+                            <Button onClick={logout} size="sm">
                                 Sign Out
                             </Button>
                         </>
                     ) : (
-                        <Button
-                            onClick={login}
-                            size="sm"
-                            variant="styledOutline"
-                        >
+                        <Button onClick={login} size="sm">
                             Sign In
                         </Button>
                     )}

@@ -31,6 +31,29 @@ function AppContent() {
 
     return (
         <Box>
+            <Box position="fixed" left="0px" right="0px" zIndex={10000}>
+                <Box
+                    margin="0 auto"
+                    maxWidth="1200px"
+                    position="relative"
+                    zIndex={10000}
+                >
+                    <Box
+                        position="absolute"
+                        left="0px"
+                        height="10000px"
+                        borderRight="1px dotted green"
+                        zIndex={10000}
+                    ></Box>
+                    <Box
+                        position="absolute"
+                        right="0px"
+                        height="10000px"
+                        borderLeft="1px dotted green"
+                        zIndex={10000}
+                    ></Box>
+                </Box>
+            </Box>
             <Box
                 className="app-container"
                 minHeight="100vh"
