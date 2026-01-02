@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { Box, Heading, Text } from '@chakra-ui/react';
 import MarkdownPage from '../components/MarkdownPage';
 import './DocPage.scss';
 
@@ -40,10 +41,10 @@ function DocPage({ manifest }) {
 
   if (!docFile) {
     return (
-      <div className="doc-page-error">
-        <h2>Page not found</h2>
-        <p>Could not find page "{page}" in project "{project}" of category "{category}"</p>
-      </div>
+      <Box className="doc-page-error" padding="40px">
+        <Heading as="h2" size="lg">Page not found</Heading>
+        <Text marginTop="10px">Could not find page "{page}" in project "{project}" of category "{category}"</Text>
+      </Box>
     );
   }
 

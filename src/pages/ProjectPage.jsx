@@ -1,4 +1,5 @@
 import { useParams, Navigate } from 'react-router-dom';
+import { Box, Heading, Text, Spinner } from '@chakra-ui/react';
 import MarkdownPage from '../components/MarkdownPage';
 import './ProjectPage.scss';
 
@@ -6,15 +7,19 @@ function ProjectPage({ manifest }) {
   const { category, project } = useParams();
 
   if (!manifest || !manifest.categories) {
-    return <div>Loading...</div>;
+    return (
+      <Box display="flex" justifyContent="center" padding="40px">
+        <Spinner />
+      </Box>
+    );
   }
 
   const categoryData = manifest.categories.find(cat => cat.path === category);
   if (!categoryData) {
     return (
-      <div>
-        <h2>Category not found</h2>
-      </div>
+      <Box padding="40px">
+        <Heading as="h2" size="lg">Category not found</Heading>
+      </Box>
     );
   }
 
@@ -25,9 +30,9 @@ function ProjectPage({ manifest }) {
 
   if (!projectData) {
     return (
-      <div>
-        <h2>Project not found</h2>
-      </div>
+      <Box padding="40px">
+        <Heading as="h2" size="lg">Project not found</Heading>
+      </Box>
     );
   }
 
@@ -45,10 +50,10 @@ function ProjectPage({ manifest }) {
   }
 
   return (
-    <div>
-      <h2>{projectData.name}</h2>
-      <p>No content available for this project.</p>
-    </div>
+    <Box padding="40px">
+      <Heading as="h2" size="lg">{projectData.name}</Heading>
+      <Text marginTop="10px">No content available for this project.</Text>
+    </Box>
   );
 }
 

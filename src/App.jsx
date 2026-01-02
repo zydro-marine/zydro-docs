@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { Box } from '@chakra-ui/react';
 import { AuthProvider } from './contexts/AuthContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -27,22 +28,22 @@ function AppContent() {
   }, []);
 
   return (
-    <div className="app-container">
+    <Box className="app-container" minHeight="100vh" display="flex" flexDirection="column" width="100%">
       <Header />
       {!isIndexPage && <Breadcrumbs manifest={manifest} />}
-      <div className={`app-content ${isIndexPage ? 'no-sidebar' : ''}`}>
+      <Box className={`app-content ${isIndexPage ? 'no-sidebar' : ''}`} display="flex" flex="1">
         {!isIndexPage && <Sidebar manifest={manifest} />}
-        <main className="app-main">
+        <Box as="main" className="app-main" flex="1" display="flex" flexDirection="column" width="100%">
           <Routes>
             <Route path="/" element={<IndexPage manifest={manifest} />} />
             <Route path="/:category" element={<CategoryPage manifest={manifest} />} />
             <Route path="/:category/:project" element={<ProjectPage manifest={manifest} />} />
             <Route path="/:category/:project/:page" element={<DocPage manifest={manifest} />} />
           </Routes>
-        </main>
-      </div>
+        </Box>
+      </Box>
       <Footer />
-    </div>
+    </Box>
   );
 }
 

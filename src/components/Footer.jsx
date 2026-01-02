@@ -1,25 +1,26 @@
+import { Box, HStack, Link, Text } from '@chakra-ui/react';
 import './Footer.scss';
 
 function Footer() {
   return (
-    <footer className="footer">
-      <div className="footer-content">
-        <div className="footer-copyright">
+    <Box as="footer" className="footer" width="100%">
+      <Box className="footer-content" margin="0 auto" maxWidth="1200px" paddingLeft="30px" paddingRight="30px" display="flex" flexDir="row" justifyContent="space-between" alignItems="center" paddingTop="20px" paddingBottom="20px">
+        <Text className="footer-copyright" fontSize="14px" color="rgba(0,0,0,0.6)">
           © {new Date().getFullYear()} Zydro Documentation
-        </div>
-        <div className="footer-links">
-          <a href="#" className="footer-link">
+        </Text>
+        <HStack className="footer-links" spacing="20px">
+          <Link href="#" className="footer-link" fontSize="14px" color="rgba(0,0,0,0.6)" _hover={{ color: 'black', textDecoration: 'none' }}>
             About
-          </a>
-          <a href="#" className="footer-link">
+          </Link>
+          <Link href="#" className="footer-link" fontSize="14px" color="rgba(0,0,0,0.6)" _hover={{ color: 'black', textDecoration: 'none' }}>
             Contact
-          </a>
-          <a href="#" className="footer-link">
+          </Link>
+          <Link href="#" className="footer-link" fontSize="14px" color="rgba(0,0,0,0.6)" _hover={{ color: 'black', textDecoration: 'none' }}>
             Privacy
-          </a>
-        </div>
-      </div>
-    </footer>
+          </Link>
+        </HStack>
+      </Box>
+    </Box>
   );
 }
 

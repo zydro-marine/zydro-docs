@@ -1,4 +1,5 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
+import { Box, Link, HStack, Text } from '@chakra-ui/react';
 import './Breadcrumbs.scss';
 
 function getFirstPagePath(categoryData) {
@@ -88,26 +89,32 @@ function Breadcrumbs({ manifest }) {
   }
 
   return (
-    <nav className="breadcrumbs" key={location.pathname}>
-      {breadcrumbs.map((crumb, index) => {
-        const isLast = index === breadcrumbs.length - 1;
-        
-        return (
-          <span key={`${location.pathname}-${index}`} className="breadcrumb-item">
-            {isLast ? (
-              <span className="breadcrumb-current">{crumb.name}</span>
-            ) : (
-              <>
-                <Link to={crumb.path} className="breadcrumb-link">
+    <Box as="nav" className="breadcrumbs" key={location.pathname} padding="1rem 2rem" backgroundColor="#fafafa" borderBottom="1px solid #e0e0e0" fontSize="0.9rem" width="100%">
+      <HStack spacing="0.25rem" display="inline-flex">
+        {breadcrumbs.map((crumb, index) => {
+          const isLast = index === breadcrumbs.length - 1;
+          
+          return (
+            <Box key={`${location.pathname}-${index}`} className="breadcrumb-item" display="inline">
+              {isLast ? (
+                <Text className="breadcrumb-current" color="#333" fontWeight="500" display="inline">
                   {crumb.name}
-                </Link>
-                <span className="breadcrumb-separator"> &gt; </span>
-              </>
-            )}
-          </span>
-        );
-      })}
-    </nav>
+                </Text>
+              ) : (
+                <>
+                  <Link as={RouterLink} to={crumb.path} className="breadcrumb-link" color="#0066cc" textDecoration="none" _hover={{ textDecoration: 'underline' }} display="inline">
+                    {crumb.name}
+                  </Link>
+                  <Text className="breadcrumb-separator" color="#999" margin="0 0.25rem" display="inline">
+                    {' > '}
+                  </Text>
+                </>
+              )}
+            </Box>
+          );
+        })}
+      </HStack>
+    </Box>
   );
 }
 

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Box, Spinner, Text } from '@chakra-ui/react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { useAuth } from '../contexts/AuthContext';
@@ -103,11 +104,19 @@ function MarkdownPage({ file }) {
   }, [headings, content]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <Box display="flex" justifyContent="center" padding="40px">
+        <Spinner />
+      </Box>
+    );
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return (
+      <Box padding="40px">
+        <Text color="red">Error: {error}</Text>
+      </Box>
+    );
   }
 
   const requiresAuth = frontmatter.auth === 'true' || frontmatter.auth === true;
@@ -117,9 +126,9 @@ function MarkdownPage({ file }) {
   }
 
   return (
-    <div className="markdown-page-wrapper">
-      <div className="markdown-page">
-        <div className="markdown">
+    <Box className="markdown-page-wrapper" display="flex" width="100%">
+      <Box className="markdown-page" flex="1" padding="40px" maxWidth="800px" margin="0 auto" width="100%">
+        <Box className="markdown">
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             components={{
@@ -167,10 +176,10 @@ function MarkdownPage({ file }) {
           >
             {content}
           </ReactMarkdown>
-        </div>
-      </div>
+        </Box>
+      </Box>
       {headings.length > 0 && <TableOfContents headings={headings} />}
-    </div>
+    </Box>
   );
 }
 

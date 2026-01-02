@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import * as TbIcons from 'react-icons/tb';
+import { Box, Input, InputGroup, InputLeftElement } from '@chakra-ui/react';
+import { TbSearch } from 'react-icons/tb';
 import './SearchBar.scss';
 
 function SearchBar({ placeholder = 'Search documentation...', onSearch }) {
@@ -14,16 +15,20 @@ function SearchBar({ placeholder = 'Search documentation...', onSearch }) {
   };
 
   return (
-    <div className="search-bar">
-      <TbIcons.TbSearch className="search-bar-icon" />
-      <input
-        type="text"
-        placeholder={placeholder}
-        value={searchQuery}
-        onChange={handleChange}
-        className="search-bar-input"
-      />
-    </div>
+    <Box className="search-bar" width="100%">
+      <InputGroup>
+        <InputLeftElement pointerEvents="none">
+          <TbSearch />
+        </InputLeftElement>
+        <Input
+          type="text"
+          placeholder={placeholder}
+          value={searchQuery}
+          onChange={handleChange}
+          className="search-bar-input"
+        />
+      </InputGroup>
+    </Box>
   );
 }
 

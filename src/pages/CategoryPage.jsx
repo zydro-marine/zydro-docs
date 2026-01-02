@@ -1,19 +1,24 @@
 import { useParams, Navigate } from 'react-router-dom';
+import { Box, Heading, Text, Spinner } from '@chakra-ui/react';
 
 function CategoryPage({ manifest }) {
   const { category } = useParams();
 
   if (!manifest || !manifest.categories) {
-    return <div>Loading...</div>;
+    return (
+      <Box display="flex" justifyContent="center" padding="40px">
+        <Spinner />
+      </Box>
+    );
   }
 
   const categoryData = manifest.categories.find(cat => cat.path === category);
 
   if (!categoryData) {
     return (
-      <div className="category-error">
-        <h2>Category not found</h2>
-      </div>
+      <Box className="category-error" padding="40px">
+        <Heading as="h2" size="lg">Category not found</Heading>
+      </Box>
     );
   }
 
@@ -39,10 +44,10 @@ function CategoryPage({ manifest }) {
   }
 
   return (
-    <div className="category-error">
-      <h2>Category not found</h2>
-      <p>No projects found in this category.</p>
-    </div>
+    <Box className="category-error" padding="40px">
+      <Heading as="h2" size="lg">Category not found</Heading>
+      <Text marginTop="10px">No projects found in this category.</Text>
+    </Box>
   );
 }
 
