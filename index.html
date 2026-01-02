@@ -1,19 +1,33 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>zydro-documentation</title>
-    <script>
-      (function() {
-        const colorMode = localStorage.getItem('chakra-ui-color-mode') || 'light';
-        document.documentElement.setAttribute('data-theme', colorMode);
-      })();
-    </script>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+  <link rel="manifest" href="/icons/site.webmanifest">
+  <meta name="msapplication-TileColor" content="#000000">
+  <meta name="theme-color" content="#000000">
+
+  <meta name="description" content="Zydro Docs" />
+  <title>Zydro Docs</title>
+
+  <link href="/base.css" rel="stylesheet">
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/index.jsx"></script>
+  <noscript>
+    <img src="/images/logos/logo-text-1.png" width="200">
+    <div>
+      <br/>
+      We're sorry! The Zydro documentation site requires JavaScript.
+    </div>
+  </noscript>
+</body>
+
 </html>

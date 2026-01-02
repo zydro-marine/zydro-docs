@@ -1,24 +1,15 @@
 import { extendTheme } from '@chakra-ui/react';
 import { ChakraProvider } from '@chakra-ui/react';
 
-const config = {
-    initialColorMode: 'light',
-    useSystemColorMode: false,
-};
-
 const theme = extendTheme({
-    config,
     fonts: {
         heading: `"Hubot Sans", system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`,
         body: `"Hubot Sans", system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`,
     },
     styles: {
-        global: (props) => ({
-            'html, body': {
-                bg: props.colorMode === 'dark' ? '#1a202c' : 'white',
-                color: props.colorMode === 'dark' ? 'white' : 'black',
-            },
-        }),
+        global: {
+            'html, body': {},
+        },
     },
     components: {
         Button: {
@@ -85,6 +76,58 @@ const theme = extendTheme({
                         bg: 'rgba(0,0,0,0)',
                     },
                 },
+                docsCta: {
+                    bg: 'rgba(0,0,0,0.0)',
+                    color: 'black',
+                    borderRadius: '0px',
+                    fontWeight: '400',
+                    border: '1px solid rgba(0,0,0,0.5)',
+                    borderRadius: '20px',
+                    height: '35px',
+                    marginRight: '8px',
+                    marginTop: '10px',
+                    _hover: {
+                        bg: 'rgba(0,0,0,0)',
+                        _disabled: {
+                            bg: 'rgba(0,0,0,0)',
+                        },
+                    },
+                    _active: {
+                        bg: 'rgba(0,0,0,0)',
+                        _disabled: {
+                            bg: 'rgba(0,0,0,0)',
+                        },
+                    },
+                    _disabled: {
+                        bg: 'rgba(0,0,0,0)',
+                    },
+                },
+                docsCtaPrimary: {
+                    bg: 'rgba(0,0,0,0.0)',
+                    color: '#2e63d4',
+                    borderRadius: '0px',
+                    fontWeight: '400',
+                    border: '1px solid #2e63d4',
+                    borderRadius: '20px',
+                    height: '35px',
+                    marginRight: '8px',
+                    marginTop: '10px',
+                    _hover: {
+                        bg: 'rgba(0,0,0,0)',
+                        _disabled: {
+                            bg: 'rgba(0,0,0,0)',
+                        },
+                    },
+                    _active: {
+                        bg: 'rgba(0,0,0,0)',
+                        _disabled: {
+                            bg: 'rgba(0,0,0,0)',
+                        },
+                    },
+                    _disabled: {
+                        bg: 'rgba(0,0,0,0)',
+                    },
+                },
             },
         },
         Modal: {
@@ -95,6 +138,8 @@ const theme = extendTheme({
             },
         },
     },
+    initialColorMode: 'dark',
+    useSystemColorMode: false,
 });
 
 const ChakraContextProvider = ({ children }) => {
@@ -102,4 +147,3 @@ const ChakraContextProvider = ({ children }) => {
 };
 
 export default ChakraContextProvider;
-

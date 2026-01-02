@@ -1,0 +1,81 @@
+import { Link as RouterLink, useLocation } from 'react-router-dom';
+import { Box, Link, Button, HStack, Image, Text, IconButton, useColorMode, useColorModeValue } from '@chakra-ui/react';
+import { TbSun, TbMoon } from 'react-icons/tb';
+import { useAuth } from '../../../contexts/AuthContext';
+import SearchBar from '../search-bar/SearchBar';
+import './Header.scss';
+
+function Header() {
+  const { isAuthenticated, user, logout, login, isLoading } = useAuth();
+  const location = useLocation();
+  const isIndexPage = location.pathname === '/';
+  const { colorMode, toggleColorMode } = useColorMode();
+  const iconColor = useColorModeValue('black', 'white');
+
+  return (
+    <Box as="header" className="header" width="100%" display="flex" justifyContent="center">
+      <Box className="header-content" maxWidth="1200px" width="100%" paddingLeft="30px" paddingRight="30px" display="flex" flexDir="row" justifyContent="space-between" alignItems="center" height="100%">
+        <Link as={RouterLink} to="/" className="header-link" textDecoration="none" color="black">
+          <HStack justifyContent="center" alignItems="center">
+            <Image src="/images/logos/logo-text-3.svg" w="70px"></Image>
+            <Text mb="0px" fontSize="16px">Documentation Hub</Text>
+          </HStack>
+        </Link>
+        {!isIndexPage && (
+          <Box className="header-search" flex="1" marginLeft="20px" marginRight="20px" maxWidth="600px">
+            <SearchBar />
+          </Box>
+        )}
+        <Box className="header-auth" display="flex" flexDir="row" alignItems="center" gap="10px" flexShrink="0">
+          <IconButton
+            aria-label="Toggle color mode"
+            icon={colorMode === 'light' ? <TbMoon /> : <TbSun />}
+            onClick={toggleColorMode}
+            size="sm"
+            variant="styledOutline"
+            color={iconColor}
+          />
+          <Button
+            className="header-button"
+            size="sm"
+            variant="styledOutline"
+          >
+            Back to Home
+          </Button>
+          {isLoading ? (
+            <Text className="header-user" fontSize="14px" color="rgba(0,0,0,0.6)">
+              Loading...
+            </Text>
+          ) : isAuthenticated ? (
+            <>
+              <Text className="header-user" fontSize="14px">
+                {user?.name || 'User'}
+              </Text>
+              <Button
+                onClick={logout}
+                className="header-button"
+                size="sm"
+                variant="styledOutline"
+              >
+                Sign Out
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button
+                onClick={login}
+                className="header-button"
+                size="sm"
+                variant="styledOutline"
+              >
+                Sign In
+              </Button>
+            </>
+          )}
+        </Box>
+      </Box>
+    </Box>
+  );
+}
+
+export default Header;
