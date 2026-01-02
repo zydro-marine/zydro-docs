@@ -1,5 +1,5 @@
-import { extendTheme } from '@chakra-ui/react';
-import { ChakraProvider } from '@chakra-ui/react';
+import { extendTheme } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 
 const theme = extendTheme({
     fonts: {
@@ -8,124 +8,124 @@ const theme = extendTheme({
     },
     styles: {
         global: {
-            'html, body': {},
+            "html, body": {},
         },
     },
     components: {
         Button: {
             baseStyle: {
-                borderRadius: '3px',
+                borderRadius: "3px",
             },
             variants: {
                 black: {
-                    bg: 'rgba(0,0,0,0.9)',
-                    color: 'white',
-                    height: '40px',
-                    borderRadius: '3px',
+                    bg: "rgba(0,0,0,0.9)",
+                    color: "white",
+                    height: "40px",
+                    borderRadius: "3px",
                     _hover: {
-                        bg: 'rgba(0,0,0,95)',
+                        bg: "rgba(0,0,0,95)",
                         _disabled: {
-                            bg: 'rgba(0,0,0,85)',
+                            bg: "rgba(0,0,0,85)",
                         },
                     },
                     _active: {
-                        bg: 'rgba(0,0,0,1.0)',
+                        bg: "rgba(0,0,0,1.0)",
                     },
                     _disabled: {
-                        bg: 'rgba(0,0,0,1.0)',
+                        bg: "rgba(0,0,0,1.0)",
                     },
                 },
                 styledOutline: {
-                    border: '1px solid rgba(0,0,0,0.2)',
-                    borderRadius: '6px',
-                    bg: 'rgba(0,0,0,0.0)',
-                    textTransform: 'none',
-                    color: 'black',
+                    border: "1px solid rgba(0,0,0,0.2)",
+                    borderRadius: "6px",
+                    bg: "rgba(0,0,0,0.0)",
+                    textTransform: "none",
+                    color: "black",
                     _hover: {
-                        bg: 'rgba(0,0,0,0.05)',
+                        bg: "rgba(0,0,0,0.05)",
                         _disabled: {
                             opacity: 0.8,
-                            bg: 'rgba(0,0,0,0)',
+                            bg: "rgba(0,0,0,0)",
                         },
                     },
                     _active: {
-                        bg: 'rgba(0,0,0,0.08)',
+                        bg: "rgba(0,0,0,0.08)",
                     },
                     _disabled: {
                         opacity: 0.5,
-                        bg: 'rgba(0,0,0,0)',
+                        bg: "rgba(0,0,0,0)",
                     },
                 },
                 fullGhost: {
-                    bg: 'rgba(0,0,0,0.0)',
-                    color: 'black',
-                    borderRadius: '0px',
+                    bg: "rgba(0,0,0,0.0)",
+                    color: "black",
+                    borderRadius: "0px",
                     _hover: {
-                        bg: 'rgba(0,0,0,0)',
+                        bg: "rgba(0,0,0,0)",
                         _disabled: {
-                            bg: 'rgba(0,0,0,0)',
+                            bg: "rgba(0,0,0,0)",
                         },
                     },
                     _active: {
-                        bg: 'rgba(0,0,0,0)',
+                        bg: "rgba(0,0,0,0)",
                         _disabled: {
-                            bg: 'rgba(0,0,0,0)',
+                            bg: "rgba(0,0,0,0)",
                         },
                     },
                     _disabled: {
-                        bg: 'rgba(0,0,0,0)',
+                        bg: "rgba(0,0,0,0)",
                     },
                 },
                 docsCta: {
-                    bg: 'rgba(0,0,0,0.0)',
-                    color: 'black',
-                    borderRadius: '0px',
-                    fontWeight: '400',
-                    border: '1px solid rgba(0,0,0,0.5)',
-                    borderRadius: '20px',
-                    height: '35px',
-                    marginRight: '8px',
-                    marginTop: '10px',
+                    bg: "rgba(0,0,0,0.0)",
+                    color: "black",
+                    borderRadius: "0px",
+                    fontWeight: "400",
+                    border: "1px solid rgba(0,0,0,0.5)",
+                    borderRadius: "20px",
+                    height: "35px",
+                    marginRight: "8px",
+                    marginTop: "10px",
                     _hover: {
-                        bg: 'rgba(0,0,0,0)',
+                        bg: "rgba(0,0,0,0)",
                         _disabled: {
-                            bg: 'rgba(0,0,0,0)',
+                            bg: "rgba(0,0,0,0)",
                         },
                     },
                     _active: {
-                        bg: 'rgba(0,0,0,0)',
+                        bg: "rgba(0,0,0,0)",
                         _disabled: {
-                            bg: 'rgba(0,0,0,0)',
+                            bg: "rgba(0,0,0,0)",
                         },
                     },
                     _disabled: {
-                        bg: 'rgba(0,0,0,0)',
+                        bg: "rgba(0,0,0,0)",
                     },
                 },
                 docsCtaPrimary: {
-                    bg: 'rgba(0,0,0,0.0)',
-                    color: '#2e63d4',
-                    borderRadius: '0px',
-                    fontWeight: '400',
-                    border: '1px solid #2e63d4',
-                    borderRadius: '20px',
-                    height: '35px',
-                    marginRight: '8px',
-                    marginTop: '10px',
+                    bg: "rgba(0,0,0,0.0)",
+                    color: "#2e63d4",
+                    borderRadius: "0px",
+                    fontWeight: "400",
+                    border: "1px solid #2e63d4",
+                    borderRadius: "20px",
+                    height: "35px",
+                    marginRight: "8px",
+                    marginTop: "10px",
                     _hover: {
-                        bg: 'rgba(0,0,0,0)',
+                        bg: "rgba(0,0,0,0)",
                         _disabled: {
-                            bg: 'rgba(0,0,0,0)',
+                            bg: "rgba(0,0,0,0)",
                         },
                     },
                     _active: {
-                        bg: 'rgba(0,0,0,0)',
+                        bg: "rgba(0,0,0,0)",
                         _disabled: {
-                            bg: 'rgba(0,0,0,0)',
+                            bg: "rgba(0,0,0,0)",
                         },
                     },
                     _disabled: {
-                        bg: 'rgba(0,0,0,0)',
+                        bg: "rgba(0,0,0,0)",
                     },
                 },
             },
@@ -133,12 +133,12 @@ const theme = extendTheme({
         Modal: {
             baseStyle: {
                 modal: {
-                    borderRadius: '0px',
+                    borderRadius: "0px",
                 },
             },
         },
     },
-    initialColorMode: 'dark',
+    initialColorMode: "dark",
     useSystemColorMode: false,
 });
 
