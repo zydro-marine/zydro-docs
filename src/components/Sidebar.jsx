@@ -25,7 +25,7 @@ function Sidebar({ manifest }) {
             return (
               <Box key={category.path} className="sidebar-category">
                 <Text className="sidebar-category-header" fontWeight="600" fontSize="14px" textTransform="uppercase" color="rgba(0,0,0,0.6)" marginBottom="10px" letterSpacing="0.5px">
-                  {category.name}
+                  {category.displayName || category.name}
                 </Text>
                 {category.projects && category.projects.length > 0 && (
                   <VStack spacing="5px" align="stretch" className="sidebar-projects">
@@ -52,7 +52,7 @@ function Sidebar({ manifest }) {
                               textDecoration: 'none'
                             }}
                           >
-                            {project.name}
+                            {project.displayName || project.name}
                           </Link>
                           {isProjectActive && project.pages && project.pages.length > 0 && (
                             <VStack spacing="2px" align="stretch" marginTop="5px" paddingLeft="12px" className="sidebar-pages">

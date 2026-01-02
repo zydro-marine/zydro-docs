@@ -2,11 +2,13 @@
   "categories": [
     {
       "name": "hardware",
+      "displayName": "Hardware",
       "path": "hardware",
       "indexFile": "hardware/index.md",
       "projects": [
         {
           "name": "compute-module",
+          "displayName": "compute-module",
           "path": "hardware/compute-module",
           "indexFile": null,
           "pages": [
@@ -19,6 +21,7 @@
         },
         {
           "name": "raspberry-pi",
+          "displayName": "raspberry-pi",
           "path": "hardware/raspberry-pi",
           "indexFile": "hardware/raspberry-pi/index.md",
           "pages": [
@@ -43,11 +46,13 @@
     },
     {
       "name": "software",
+      "displayName": "software",
       "path": "software",
       "indexFile": null,
       "projects": [
         {
           "name": "raspberry-pi-connect",
+          "displayName": "raspberry-pi-connect",
           "path": "software/raspberry-pi-connect",
           "indexFile": null,
           "pages": [
@@ -60,6 +65,7 @@
         },
         {
           "name": "raspberry-pi-os",
+          "displayName": "raspberry-pi-os",
           "path": "software/raspberry-pi-os",
           "indexFile": null,
           "pages": [
@@ -71,6 +77,13 @@
           ]
         }
       ]
+    },
+    {
+      "name": "usv-core",
+      "displayName": "USV Core",
+      "path": "usv-core",
+      "indexFile": "usv-core/index.md",
+      "projects": []
     }
   ]
 }

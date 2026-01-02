@@ -9,6 +9,45 @@ const docsDir = path.join(__dirname, '..', 'docs');
 const publicDocsDir = path.join(__dirname, '..', 'public', 'docs');
 const manifestPath = path.join(__dirname, '..', 'public', 'manifest.json');
 
+function parseFrontmatter(content) {
+  const frontmatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/;
+  const match = content.match(frontmatterRegex);
+  
+  if (!match) {
+    return { frontmatter: {}, content };
+  }
+
+  const frontmatterText = match[1];
+  const markdownContent = match[2];
+  const frontmatter = {};
+
+  frontmatterText.split('\n').forEach(line => {
+    const colonIndex = line.indexOf(':');
+    if (colonIndex > 0) {
+      const key = line.substring(0, colonIndex).trim();
+      const value = line.substring(colonIndex + 1).trim().replace(/^["']|["']$/g, '');
+      frontmatter[key] = value;
+    }
+  });
+
+  return { frontmatter, content: markdownContent };
+}
+
+function getDisplayName(fullPath, defaultName) {
+  if (!fullPath || !fs.existsSync(fullPath)) {
+    return defaultName;
+  }
+
+  try {
+    const content = fs.readFileSync(fullPath, 'utf8');
+    const { frontmatter } = parseFrontmatter(content);
+    return frontmatter.displayName || defaultName;
+  } catch (err) {
+    console.warn(`Error reading ${fullPath}:`, err.message);
+    return defaultName;
+  }
+}
+
 function scanDocsDirectory(dir, basePath = '', depth = 0) {
   const entries = [];
   const items = fs.readdirSync(dir, { withFileTypes: true });
@@ -25,12 +64,14 @@ function scanDocsDirectory(dir, basePath = '', depth = 0) {
           name: item.name,
           path: relativePath,
           projects: [],
-          indexFile: null
+          indexFile: null,
+          displayName: item.name
         };
 
         const indexPath = path.join(fullPath, 'index.md');
         if (fs.existsSync(indexPath)) {
           category.indexFile = `${relativePath}/index.md`;
+          category.displayName = getDisplayName(indexPath, item.name);
         }
 
         const subItems = scanDocsDirectory(fullPath, relativePath, depth + 1);
@@ -49,12 +90,14 @@ function scanDocsDirectory(dir, basePath = '', depth = 0) {
           name: item.name,
           path: relativePath,
           pages: [],
-          indexFile: null
+          indexFile: null,
+          displayName: item.name
         };
 
         const indexPath = path.join(fullPath, 'index.md');
         if (fs.existsSync(indexPath)) {
           project.indexFile = `${relativePath}/index.md`;
+          project.displayName = getDisplayName(indexPath, item.name);
         }
 
         const subItems = scanDocsDirectory(fullPath, relativePath, depth + 1);
@@ -115,10 +158,12 @@ function generateManifest() {
   const manifest = {
     categories: categories.map(cat => ({
       name: cat.name,
+      displayName: cat.displayName || cat.name,
       path: cat.path,
       indexFile: cat.indexFile || null,
       projects: cat.projects.map(project => ({
         name: project.name,
+        displayName: project.displayName || project.name,
         path: project.path,
         indexFile: project.indexFile || null,
         pages: project.pages.map(page => ({

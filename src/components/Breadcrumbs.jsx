@@ -42,7 +42,7 @@ function Breadcrumbs({ manifest }) {
     const categoryPath = getFirstPagePath(categoryData);
     if (categoryPath) {
       breadcrumbs.push({
-        name: categoryData.name,
+        name: categoryData.displayName || categoryData.name,
         path: categoryPath
       });
     }
@@ -62,7 +62,7 @@ function Breadcrumbs({ manifest }) {
               : `/${category}/${project}`);
         
         breadcrumbs.push({
-          name: projectData.name,
+          name: projectData.displayName || projectData.name,
           path: projectPath
         });
 

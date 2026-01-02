@@ -51,7 +51,7 @@ function ProjectPage({ manifest }) {
 
   return (
     <Box padding="40px">
-      <Heading as="h2" size="lg">{projectData.name}</Heading>
+      <Heading as="h2" size="lg">{projectData.displayName || projectData.name}</Heading>
       <Text marginTop="10px">No content available for this project.</Text>
     </Box>
   );

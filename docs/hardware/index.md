@@ -1,3 +1,7 @@
+---
+displayName: Hardware
+---
+
 # Hardware Documentation
 
 Welcome to the Hardware documentation section. This category covers all hardware-related documentation for Zydro products.
@@ -5,4 +9,3 @@ Welcome to the Hardware documentation section. This category covers all hardware
 ## Available Projects
 
 Browse the projects below to find documentation for specific hardware components and systems.
-

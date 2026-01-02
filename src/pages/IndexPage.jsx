@@ -31,7 +31,7 @@ function IndexPage({ manifest }) {
   const allProjects = manifest.categories.flatMap(category =>
     category.projects.map(project => ({
       ...project,
-      categoryName: category.name,
+      categoryName: category.displayName || category.name,
       categoryPath: category.path
     }))
   );
@@ -42,8 +42,8 @@ function IndexPage({ manifest }) {
 
   return (
     <Box className="index-page" width="100%">
-      <Box as="header" className="index-header" width="100%" padding="60px 0" backgroundColor="#fafafa">
-        <Box className="index-header-content" margin="0 auto" maxWidth="1200px" paddingLeft="30px" paddingRight="30px">
+      <Box as="header" className="index-header" width="100%" paddingTop="60px" paddingBottom="0" backgroundColor="#fafafa">
+        <Box className="index-header-content" margin="0 auto" maxWidth="1200px" paddingLeft="30px" paddingRight="30px" paddingBottom="0">
           <Heading as="h1" className="index-title" size="xl" marginBottom="30px">
             Documentation
           </Heading>
@@ -52,11 +52,26 @@ function IndexPage({ manifest }) {
             <SearchBar />
           </Box>
 
-          <HStack className="index-categories" spacing="10px" flexWrap="wrap">
+          <HStack className="index-categories" spacing="0" flexWrap="wrap" borderBottom="3px solid #e0e0e0" marginBottom="0">
             <Button
               onClick={() => setSelectedCategory(null)}
-              variant={selectedCategory === null ? 'black' : 'styledOutline'}
-              size="sm"
+              className={`index-category-button ${selectedCategory === null ? 'active' : ''}`}
+              borderRadius="0"
+              borderTopRadius="6px"
+              padding="16px 24px"
+              fontSize="16px"
+              fontWeight="500"
+              height="auto"
+              backgroundColor={selectedCategory === null ? 'transparent' : 'transparent'}
+              color={selectedCategory === null ? '#0066cc' : 'rgba(0,0,0,0.7)'}
+              border="none"
+              borderBottom={selectedCategory === null ? '3px solid #0066cc' : '3px solid transparent'}
+              marginBottom="-3px"
+              _hover={{
+                backgroundColor: 'transparent',
+                color: '#0066cc',
+                borderBottom: '3px solid rgba(0,102,204,0.5)'
+              }}
             >
               All
             </Button>
@@ -64,10 +79,25 @@ function IndexPage({ manifest }) {
               <Button
                 key={category.path}
                 onClick={() => setSelectedCategory(category.path)}
-                variant={selectedCategory === category.path ? 'black' : 'styledOutline'}
-                size="sm"
+                className={`index-category-button ${selectedCategory === category.path ? 'active' : ''}`}
+                borderRadius="0"
+                borderTopRadius="6px"
+                padding="16px 24px"
+                fontSize="16px"
+                fontWeight="500"
+                height="auto"
+                backgroundColor="transparent"
+                color={selectedCategory === category.path ? '#0066cc' : 'rgba(0,0,0,0.7)'}
+                border="none"
+                borderBottom={selectedCategory === category.path ? '3px solid #0066cc' : '3px solid transparent'}
+                marginBottom="-3px"
+                _hover={{
+                  backgroundColor: 'transparent',
+                  color: '#0066cc',
+                  borderBottom: '3px solid rgba(0,102,204,0.5)'
+                }}
               >
-                {category.name}
+                {category.displayName || category.name}
               </Button>
             ))}
           </HStack>
@@ -101,7 +131,7 @@ function IndexPage({ manifest }) {
                         <IconComponent className="index-tile-icon" />
                       </Box>
                       <Heading as="h2" className="index-tile-title" size="md" color="black" overflowWrap="break-word" wordBreak="break-word" lineHeight="1.4">
-                        {project.name}
+                        {project.displayName || project.name}
                       </Heading>
                     </HStack>
                     {project.pages && project.pages.length > 0 && (
