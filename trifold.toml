@@ -8,3 +8,6 @@ remote_ignore = []
 storage_zone = "zydro-documentation"
 custom_404_page = "/index.html"
 
+[[redirects]]
+    from = "*://zydro-documentation.b-cdn.net/*"
+    to = "https://docs.zydromarine.com{{path}}"
