@@ -48,7 +48,7 @@
       "name": "software",
       "displayName": "software",
       "path": "software",
-      "indexFile": null,
+      "indexFile": "software/index.md",
       "projects": [
         {
           "name": "raspberry-pi-connect",
@@ -83,6 +83,20 @@
       "displayName": "USV Core",
       "path": "usv-core",
       "indexFile": "usv-core/index.md",
+      "projects": []
+    },
+    {
+      "name": "zeus-c2",
+      "displayName": "Zeus C2",
+      "path": "zeus-c2",
+      "indexFile": "zeus-c2/index.md",
+      "projects": []
+    },
+    {
+      "name": "account",
+      "displayName": "Account",
+      "path": "account",
+      "indexFile": "account/index.md",
       "projects": []
     }
   ]

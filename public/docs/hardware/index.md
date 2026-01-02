@@ -1,5 +1,6 @@
 ---
 displayName: Hardware
+priority: 1
 ---
 
 # Hardware Documentation

@@ -48,6 +48,22 @@ function getDisplayName(fullPath, defaultName) {
   }
 }
 
+function getPriority(fullPath, defaultPriority = 999) {
+  if (!fullPath || !fs.existsSync(fullPath)) {
+    return defaultPriority;
+  }
+
+  try {
+    const content = fs.readFileSync(fullPath, 'utf8');
+    const { frontmatter } = parseFrontmatter(content);
+    const priority = frontmatter.priority ? parseInt(frontmatter.priority, 10) : defaultPriority;
+    return isNaN(priority) ? defaultPriority : priority;
+  } catch (err) {
+    console.warn(`Error reading ${fullPath}:`, err.message);
+    return defaultPriority;
+  }
+}
+
 function scanDocsDirectory(dir, basePath = '', depth = 0) {
   const entries = [];
   const items = fs.readdirSync(dir, { withFileTypes: true });
@@ -72,6 +88,9 @@ function scanDocsDirectory(dir, basePath = '', depth = 0) {
         if (fs.existsSync(indexPath)) {
           category.indexFile = `${relativePath}/index.md`;
           category.displayName = getDisplayName(indexPath, item.name);
+          category.priority = getPriority(indexPath, 999);
+        } else {
+          category.priority = 999;
         }
 
         const subItems = scanDocsDirectory(fullPath, relativePath, depth + 1);
@@ -98,6 +117,9 @@ function scanDocsDirectory(dir, basePath = '', depth = 0) {
         if (fs.existsSync(indexPath)) {
           project.indexFile = `${relativePath}/index.md`;
           project.displayName = getDisplayName(indexPath, item.name);
+          project.priority = getPriority(indexPath, 999);
+        } else {
+          project.priority = 999;
         }
 
         const subItems = scanDocsDirectory(fullPath, relativePath, depth + 1);
@@ -117,11 +139,14 @@ function scanDocsDirectory(dir, basePath = '', depth = 0) {
         indexFile = relativePath;
       } else {
         const pageName = item.name.replace('.md', '');
+        const pagePath = path.join(dir, item.name);
+        const priority = getPriority(pagePath, 999);
         entries.push({
           type: 'page',
           name: pageName,
           path: relativePath.replace('.md', ''),
-          file: relativePath
+          file: relativePath,
+          priority: priority
         });
       }
     }
@@ -155,24 +180,37 @@ function generateManifest() {
   const structure = scanDocsDirectory(docsDir);
   const categories = structure.filter(item => item.type === 'category');
 
+  // Sort categories by priority
+  categories.sort((a, b) => (a.priority || 999) - (b.priority || 999));
+
   const manifest = {
-    categories: categories.map(cat => ({
-      name: cat.name,
-      displayName: cat.displayName || cat.name,
-      path: cat.path,
-      indexFile: cat.indexFile || null,
-      projects: cat.projects.map(project => ({
-        name: project.name,
-        displayName: project.displayName || project.name,
-        path: project.path,
-        indexFile: project.indexFile || null,
-        pages: project.pages.map(page => ({
-          name: page.name,
-          path: page.path,
-          file: page.file
-        }))
-      }))
-    }))
+    categories: categories.map(cat => {
+      // Sort projects by priority
+      const sortedProjects = [...cat.projects].sort((a, b) => (a.priority || 999) - (b.priority || 999));
+      
+      return {
+        name: cat.name,
+        displayName: cat.displayName || cat.name,
+        path: cat.path,
+        indexFile: cat.indexFile || null,
+        projects: sortedProjects.map(project => {
+          // Sort pages by priority
+          const sortedPages = [...project.pages].sort((a, b) => (a.priority || 999) - (b.priority || 999));
+          
+          return {
+            name: project.name,
+            displayName: project.displayName || project.name,
+            path: project.path,
+            indexFile: project.indexFile || null,
+            pages: sortedPages.map(page => ({
+              name: page.name,
+              path: page.path,
+              file: page.file
+            }))
+          };
+        })
+      };
+    })
   };
 
   fs.mkdirSync(path.dirname(manifestPath), { recursive: true });
