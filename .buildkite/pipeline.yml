@@ -1,0 +1,47 @@
+steps:
+  - wait: ~
+  - label: "build-react-spa"
+    key: "build-react-spa"
+    commands:
+      - "npm install"
+      - "npm run build"
+    agents:
+      queue: "self-hosted-linux-x86-64"
+    plugins:
+      - docker:
+          image: "402590802363.dkr.ecr.us-east-2.amazonaws.com/dev-react-builder:latest"
+          workdir: /app
+          mount-buildkite-agent: true
+          propagate-environment: true
+          propagate-uid-gid: true
+          entrypoint: ""
+          shell: ["/bin/bash", "-c"]
+    artifact_paths:
+      - "dist/**/*"
+  - wait: ~
+  - label: "deploy-react-spa"
+    key: "deploy-react-spa"
+    commands:
+      - source /home/buildkite-agent/.local/bin/env
+      - rm -rf dist/
+      - mkdir -p dist/
+      - buildkite-agent artifact download 'dist/**' dist/
+      - trifold status -v
+      - trifold publish
+    agents:
+      queue: "self-hosted-linux-x86-64"
+    plugins:
+      - docker:
+          image: "402590802363.dkr.ecr.us-east-2.amazonaws.com/dev-react-builder:latest"
+          workdir: /app
+          mount-buildkite-agent: true
+          propagate-environment: true
+          propagate-uid-gid: true
+          entrypoint: ""
+          shell: ["/bin/bash", "-c"]
+          environment:
+            - "BUNNY_API_KEY"
+    branches: "main"
+
+secrets:
+  - BUNNY_API_KEY

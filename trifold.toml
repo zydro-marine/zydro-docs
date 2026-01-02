@@ -6,5 +6,5 @@ remote_ignore = []
 
 [bunny]
 storage_zone = "zydro-documentation"
-custom_404_page = "/404.html"
+custom_404_page = "/index.html"
 
